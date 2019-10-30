@@ -1,16 +1,12 @@
 package simplemoviedatabase;
 
 import java.awt.Color;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Home extends javax.swing.JFrame {
     String currentUser;
+    AbstractThings abstractThings=new AbstractThings() {};
   
     public Home() {
         initComponents();
@@ -200,62 +196,26 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchbarFocusLost
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        PreparedStatement statement;
-        ResultSet resultset;
         String movieName=searchbar.getText();
-        String query="SELECT * FROM `movies` WHERE `TITLE` = ?";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            statement.setString(1,movieName);
-            resultset=statement.executeQuery();
-            if(resultset.next()) {
-               this.dispose();    
-               MovieDetails movieDetails= new MovieDetails();
-               movieDetails.currentUserMD=currentUser;
-               movieDetails.movieID=resultset.getInt("MOVIE_ID"); 
-               movieDetails.setLabelTitle(resultset.getString("TITLE"));
-               movieDetails.setMovieYear(resultset.getString("YEAR"));
-               movieDetails.setMovieDescription(resultset.getString("DESCRIPTION"));
-               movieDetails.setPoster(resultset.getString("PICTURE"));
-               movieDetails.setVisible(true);
-               movieDetails.pack();
-               movieDetails.setLocationRelativeTo(null);
-               movieDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-               
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        boolean found=abstractThings.searchButtonAction(movieName,currentUser);
+        if(found) {      
+            this.dispose();    
+        } else {
+            JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void watchlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchlistMouseClicked
-         Watchlist watchlist=new Watchlist();
-         watchlist.currentUserWL=currentUser; 
-         watchlist.fillList();
          this.dispose();
-         watchlist.setVisible(true);
-         watchlist.pack();
-         watchlist.setLocationRelativeTo(null);
-         watchlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         abstractThings.openWatchList(currentUser);
     }//GEN-LAST:event_watchlistMouseClicked
 
     private void watchedMoviesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchedMoviesMouseClicked
-         Watchedlist watchedlist=new Watchedlist();
-         watchedlist.currentUserRL=currentUser;
-         watchedlist.fillList();
          this.dispose();
-         watchedlist.setVisible(true);
-         watchedlist.pack();
-         watchedlist.setLocationRelativeTo(null);
-         watchedlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         abstractThings.openWatchedList(currentUser);
     }//GEN-LAST:event_watchedMoviesMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

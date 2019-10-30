@@ -245,11 +245,11 @@ public class Login extends javax.swing.JFrame {
             resultset=statement.executeQuery();
             if(resultset.next()) {
                 Home home= new Home();
-                home.currentUser=resultset.getString("email");
                 this.dispose(); 
                 home.setVisible(true);
                 home.pack();
                 home.setLocationRelativeTo(null);
+                home.currentUser=resultset.getString("email");
                 home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             } else {
                 

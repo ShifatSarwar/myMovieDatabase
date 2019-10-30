@@ -1,8 +1,6 @@
 package simplemoviedatabase;
 
 import java.awt.Color;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -12,10 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Watchedlist extends javax.swing.JFrame {
-    String currentUserRL;
-    PreparedStatement statement;
-    ResultSet resultset;
+    String currentUser;
     DefaultListModel dm=new DefaultListModel();
+    AbstractThings abstractThings=new AbstractThings() {};
 
     public Watchedlist() {
         initComponents();
@@ -108,6 +105,9 @@ public class Watchedlist extends javax.swing.JFrame {
         jwatchedlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jwatchedlistMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jwatchedlistMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(jwatchedlist);
@@ -216,6 +216,7 @@ public class Watchedlist extends javax.swing.JFrame {
         this.dispose();    
         Home home= new Home();
         home.setVisible(true);
+        home.currentUser=currentUser;
         home.pack();
         home.setLocationRelativeTo(null);
         home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -224,100 +225,56 @@ public class Watchedlist extends javax.swing.JFrame {
     public void fillList() {
         jwatchedlist.setModel(dm);
         String query="SELECT `MOVIE_ID` FROM `watchedlist` WHERE `EMAIL` = ?";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            statement.setString(1,currentUserRL);
-            resultset=statement.executeQuery();
-            ArrayList<Integer> record=new ArrayList<>();
-            while (resultset.next()) {
-                record.add(resultset.getInt("MOVIE_ID"));
-            }
-            query="SELECT `TITLE` FROM `movies` WHERE `MOVIE_ID` = ?";
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            for(int index:record) {               
-                statement.setInt(1,index);
-                resultset=statement.executeQuery();
-                if(resultset.next()) {
-                    dm.addElement(resultset.getString("TITLE"));
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        String result=abstractThings.fillArray(currentUser, query);
+        String[] values = result.split(",");
+        for(String index:values) {
+            dm.addElement(index);
         }
-        
     }
     
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        int index=jwatchedlist.getSelectedIndex();
-        String movieName=jwatchedlist.getSelectedValue();
-        String query="SELECT `MOVIE_ID` FROM `movies` WHERE `TITLE`=?";
         try {
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            statement.setString(1,movieName);
-            resultset=statement.executeQuery();
-            if(resultset.next()) {
-               int movieID=resultset.getInt("MOVIE_ID");
-               query="DELETE FROM `watchedlist` WHERE `MOVIE_ID`=?";
-               statement=DatabaseConnection.getConnection().prepareStatement(query);
-               statement.setInt(1,movieID);
-               statement.executeUpdate();
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dm.removeElementAt(index);
-        JOptionPane.showMessageDialog(null, "Movie removed from list", movieName,2);
-        
+            int index=jwatchedlist.getSelectedIndex();
+            String movieName=jwatchedlist.getSelectedValue();
+            String query="DELETE FROM `watchedlist` WHERE `MOVIE_ID`=? AND `EMAIL`=?";
+            abstractThings.removeFromList(currentUser, movieName,query);
+            dm.removeElementAt(index);
+            JOptionPane.showMessageDialog(null, "Movie removed from list", movieName,2);
+        } catch(ArrayIndexOutOfBoundsException e) {}
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void watchlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchlistMouseClicked
-         Watchlist watchlist=new Watchlist();
-         watchlist.currentUserWL=currentUserRL; 
-         watchlist.fillList();
          this.dispose();
-         watchlist.setVisible(true);
-         watchlist.pack();
-         watchlist.setLocationRelativeTo(null);
-         watchlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         abstractThings.openWatchList(currentUser);
     }//GEN-LAST:event_watchlistMouseClicked
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String movieName=searchbar.getText();
-        String query="SELECT * FROM `movies` WHERE `TITLE` = ?";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            statement.setString(1,movieName);
-            resultset=statement.executeQuery();
-            if(resultset.next()) {
-               this.dispose();    
-               MovieDetails movieDetails= new MovieDetails();
-               movieDetails.currentUserMD=currentUserRL;
-               movieDetails.movieID=resultset.getInt("MOVIE_ID"); 
-               movieDetails.setLabelTitle(resultset.getString("TITLE"));
-               movieDetails.setMovieYear(resultset.getString("YEAR"));
-               movieDetails.setMovieDescription(resultset.getString("DESCRIPTION"));
-               movieDetails.setPoster(resultset.getString("PICTURE"));
-               movieDetails.setVisible(true);
-               movieDetails.pack();
-               movieDetails.setLocationRelativeTo(null);
-               movieDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-               
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        boolean found=abstractThings.searchButtonAction(movieName,currentUser);
+        if(found) {      
+            this.dispose();    
+        } else {
+            JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jwatchedlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jwatchedlistMouseClicked
-        String selected=jwatchedlist.getSelectedValue().toString();    
+        if (evt.getClickCount()==2 ){
+            String movieName=jwatchedlist.getSelectedValue();
+            boolean found=abstractThings.searchButtonAction(movieName,currentUser);
+            if(found) {      
+                this.dispose();    
+            } else {
+               JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
+            }
+        }
     }//GEN-LAST:event_jwatchedlistMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jwatchedlistMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jwatchedlistMousePressed
+
+    }//GEN-LAST:event_jwatchedlistMousePressed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -2,20 +2,15 @@ package simplemoviedatabase;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class MovieDetails extends javax.swing.JFrame {
-     String currentUserMD;
      int movieID;
-     PreparedStatement statement;
-     ResultSet resultset;
+     String currentUser;
+     AbstractThings abstractThings=new AbstractThings() {};
+    
  
     public MovieDetails() {
        initComponents();
@@ -297,6 +292,7 @@ public class MovieDetails extends javax.swing.JFrame {
         this.dispose();    
         Home home= new Home();
         home.setVisible(true);
+        home.currentUser=currentUser;
         home.pack();
         home.setLocationRelativeTo(null);
         home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -313,103 +309,36 @@ public class MovieDetails extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String movieName=searchbar.getText();
-        String query="SELECT * FROM `movies` WHERE `TITLE` = ?";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(query);
-            statement.setString(1,movieName);
-            resultset=statement.executeQuery();
-            if(resultset.next()) {
-               this.dispose();    
-               MovieDetails movieDetails= new MovieDetails();
-               movieDetails.movieID=resultset.getInt("MOVIE_ID"); 
-               movieDetails.currentUserMD=currentUserMD; 
-               movieDetails.setLabelTitle(resultset.getString("TITLE"));
-               movieDetails.setMovieYear(resultset.getString("YEAR"));
-               movieDetails.setMovieDescription(resultset.getString("DESCRIPTION"));
-               movieDetails.setPoster(resultset.getString("PICTURE"));
-               movieDetails.setVisible(true);
-               movieDetails.pack();
-               movieDetails.setLocationRelativeTo(null);
-               movieDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-               
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        boolean found=abstractThings.searchButtonAction(movieName, currentUser);
+        if(found) {      
+            this.dispose();    
+        } else {
+            JOptionPane.showMessageDialog(null, "Movie Not Found", "Try Again",2);
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void addtowatchedlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtowatchedlistActionPerformed
-        String checkQuery="SELECT * FROM `watchedlist` WHERE `EMAIL`=? AND `MOVIE_ID`=?";
+        String checkQuery="SELECT * FROM `watchedlist` WHERE `MOVIE_ID`=? AND `EMAIL`=?";
         String query="INSERT INTO`watchedlist` (`MOVIE_ID`, `EMAIL`) VALUES (?, ?)";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(checkQuery);
-            statement.setString(1,currentUserMD);
-            statement.setInt(2, movieID);
-            resultset=statement.executeQuery();
-            if (resultset.next()) {
-                JOptionPane.showMessageDialog(null, "Movie Already Added", "Try Something New",2);
-            } else {              
-                statement=DatabaseConnection.getConnection().prepareStatement(query);
-                statement.setInt(1, movieID);
-                statement.setString(2,currentUserMD);
-                statement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Movie Added", "Try Something New",2);
-            }
-        } catch (SQLException ex) { 
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        abstractThings.addToList(checkQuery,query,movieID,currentUser);
     }//GEN-LAST:event_addtowatchedlistActionPerformed
 
     private void addTowatchlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTowatchlistActionPerformed
-        String checkQuery="SELECT * FROM `watchlist` WHERE `EMAIL`=? AND `MOVIE_ID`=?";
+        String checkQuery="SELECT * FROM `watchlist` WHERE `MOVIE_ID`=? AND `EMAIL`=?";
         String query="INSERT INTO`watchlist` (`MOVIE_ID`, `EMAIL`) VALUES (?, ?)";
-        try {
-            statement=DatabaseConnection.getConnection().prepareStatement(checkQuery);
-            statement.setString(1,currentUserMD);
-            statement.setInt(2, movieID);
-            resultset=statement.executeQuery();
-            if (resultset.next()) {
-                JOptionPane.showMessageDialog(null, "Movie Already Added", "Try Something New",2);
-            } else {              
-                statement=DatabaseConnection.getConnection().prepareStatement(query);
-                statement.setInt(1, movieID);
-                statement.setString(2,currentUserMD);
-                statement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Movie Added", "Try Something New",2);
-            }
-        } catch (SQLException ex) { 
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        abstractThings.addToList(checkQuery,query,movieID,currentUser);
     }//GEN-LAST:event_addTowatchlistActionPerformed
 
     private void watchedListLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchedListLabelMouseClicked
-         Watchedlist watchedlist=new Watchedlist();
-         watchedlist.currentUserRL=currentUserMD;
-         watchedlist.fillList();
-         this.dispose();
-         watchedlist.setVisible(true);
-         watchedlist.pack();
-         watchedlist.setLocationRelativeTo(null);
-         watchedlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+        abstractThings.openWatchedList(currentUser);
     }//GEN-LAST:event_watchedListLabelMouseClicked
 
     private void watchlistLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchlistLabelMouseClicked
-         Watchlist watchlist=new Watchlist();
-         watchlist.currentUserWL=currentUserMD; 
-         watchlist.fillList();
          this.dispose();
-         watchlist.setVisible(true);
-         watchlist.pack();
-         watchlist.setLocationRelativeTo(null);
-         watchlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        abstractThings.openWatchList(currentUser);
     }//GEN-LAST:event_watchlistLabelMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
