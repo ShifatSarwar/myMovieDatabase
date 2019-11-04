@@ -244,13 +244,24 @@ public class Login extends javax.swing.JFrame {
             statement.setString(2,pass);
             resultset=statement.executeQuery();
             if(resultset.next()) {
-                Home home= new Home();
-                this.dispose(); 
-                home.setVisible(true);
-                home.pack();
-                home.setLocationRelativeTo(null);
-                home.currentUser=resultset.getString("email");
-                home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                String mailid=resultset.getString("email");
+                this.dispose();
+                if(mailid.equals("admin@moviedb.com")) {
+                   Adminhome home=new Adminhome();
+                   home.setVisible(true);
+                   home.pack();
+                   home.setLocationRelativeTo(null);
+                   home.currentUser=mailid;
+                   home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else {
+                   Home home= new Home();    
+                   home.setVisible(true);
+                   home.pack();
+                   home.setLocationRelativeTo(null);
+                   home.currentUser=mailid;
+                   home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         }
+                
             } else {
                 
                 JOptionPane.showMessageDialog(null, "Invalid Email or Password", "Login Error",2);

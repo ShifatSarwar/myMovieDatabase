@@ -54,8 +54,9 @@ public class MovieDetails extends javax.swing.JFrame {
         imdbLabel = new javax.swing.JLabel();
         addtowatchedlist = new javax.swing.JButton();
         addTowatchlist = new javax.swing.JButton();
-        watchedListLabel = new javax.swing.JLabel();
+        usercommentsLabel = new javax.swing.JLabel();
         watchlistLabel = new javax.swing.JLabel();
+        watchedListLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,7 +136,7 @@ public class MovieDetails extends javax.swing.JFrame {
         imdbLabel.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         imdbLabel.setForeground(new java.awt.Color(245, 197, 24));
         imdbLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imdbLabel.setText("IMDB");
+        imdbLabel.setText("Advanced Search");
 
         addtowatchedlist.setBackground(new java.awt.Color(255, 255, 255));
         addtowatchedlist.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
@@ -157,12 +158,12 @@ public class MovieDetails extends javax.swing.JFrame {
             }
         });
 
-        watchedListLabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
-        watchedListLabel.setForeground(new java.awt.Color(153, 153, 153));
-        watchedListLabel.setText("Watched List");
-        watchedListLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        usercommentsLabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        usercommentsLabel.setForeground(new java.awt.Color(153, 153, 153));
+        usercommentsLabel.setText("User Comments");
+        usercommentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                watchedListLabelMouseClicked(evt);
+                usercommentsLabelMouseClicked(evt);
             }
         });
 
@@ -172,6 +173,15 @@ public class MovieDetails extends javax.swing.JFrame {
         watchlistLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchlistLabelMouseClicked(evt);
+            }
+        });
+
+        watchedListLabel1.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        watchedListLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        watchedListLabel1.setText("Watched List");
+        watchedListLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                watchedListLabel1MouseClicked(evt);
             }
         });
 
@@ -190,8 +200,8 @@ public class MovieDetails extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(watchedListLabel)
-                                .addGap(18, 18, 18)
+                                .addComponent(watchedListLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(watchlistLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(homelabel)
@@ -203,21 +213,21 @@ public class MovieDetails extends javax.swing.JFrame {
                                 .addComponent(searchButton))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(picLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(yearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(addTowatchlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(addtowatchedlist, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(imdbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usercommentsLabel)
+                                    .addComponent(yearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addTowatchlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addtowatchedlist, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(imdbLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -229,8 +239,8 @@ public class MovieDetails extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(logOutLabel)
                             .addComponent(homelabel)
-                            .addComponent(watchedListLabel)
-                            .addComponent(watchlistLabel))
+                            .addComponent(watchlistLabel)
+                            .addComponent(watchedListLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,17 +256,19 @@ public class MovieDetails extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(yearLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(addTowatchlist, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addtowatchedlist, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                .addComponent(addtowatchedlist, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(yearLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(usercommentsLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imdbLabel)
-                        .addGap(97, 97, 97))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 122, Short.MAX_VALUE))
+                    .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,12 +302,7 @@ public class MovieDetails extends javax.swing.JFrame {
 
     private void homelabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homelabelMouseClicked
         this.dispose();    
-        Home home= new Home();
-        home.setVisible(true);
-        home.currentUser=currentUser;
-        home.pack();
-        home.setLocationRelativeTo(null);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        abstractThings.goHome(currentUser);
     }//GEN-LAST:event_homelabelMouseClicked
 
     private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
@@ -329,15 +336,20 @@ public class MovieDetails extends javax.swing.JFrame {
         abstractThings.addToList(checkQuery,query,movieID,currentUser);
     }//GEN-LAST:event_addTowatchlistActionPerformed
 
-    private void watchedListLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchedListLabelMouseClicked
-        this.dispose();
-        abstractThings.openWatchedList(currentUser);
-    }//GEN-LAST:event_watchedListLabelMouseClicked
+    private void usercommentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usercommentsLabelMouseClicked
+        this.dispose();  
+        abstractThings.openUserComments(currentUser, titleLabel.getText());
+    }//GEN-LAST:event_usercommentsLabelMouseClicked
 
     private void watchlistLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchlistLabelMouseClicked
-         this.dispose();
+        this.dispose();
         abstractThings.openWatchList(currentUser);
     }//GEN-LAST:event_watchlistLabelMouseClicked
+
+    private void watchedListLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchedListLabel1MouseClicked
+        this.dispose();
+        abstractThings.openWatchedList(currentUser);
+    }//GEN-LAST:event_watchedListLabel1MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -386,7 +398,8 @@ public class MovieDetails extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel titleset1;
     private javax.swing.JLabel titleset2;
-    private javax.swing.JLabel watchedListLabel;
+    private javax.swing.JLabel usercommentsLabel;
+    private javax.swing.JLabel watchedListLabel1;
     private javax.swing.JLabel watchlistLabel;
     private javax.swing.JLabel yearLabel;
     // End of variables declaration//GEN-END:variables

@@ -1,11 +1,9 @@
 package simplemoviedatabase;
 
 import java.awt.Color;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Image;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -33,6 +31,7 @@ public class Watchedlist extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jwatchedlist = new javax.swing.JList<>();
         searchButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,11 +96,6 @@ public class Watchedlist extends javax.swing.JFrame {
         jwatchedlist.setBackground(new java.awt.Color(0, 0, 0));
         jwatchedlist.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
         jwatchedlist.setForeground(new java.awt.Color(204, 204, 204));
-        jwatchedlist.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jwatchedlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jwatchedlistMouseClicked(evt);
@@ -122,6 +116,12 @@ public class Watchedlist extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Serif", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("User Watchedlist");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,24 +130,28 @@ public class Watchedlist extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(removeButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(titleset1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(titleset2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(titleset1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(titleset2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)))
                         .addComponent(watchlist)
                         .addGap(18, 18, 18)
                         .addComponent(homelabel)
                         .addGap(18, 18, 18)
-                        .addComponent(logOutLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchButton)
-                        .addGap(0, 381, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(removeButton)))
+                        .addComponent(logOutLabel)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,7 +161,8 @@ public class Watchedlist extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(titleset1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(titleset2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(titleset2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(logOutLabel)
                         .addComponent(homelabel)
@@ -214,28 +219,34 @@ public class Watchedlist extends javax.swing.JFrame {
 
     private void homelabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homelabelMouseClicked
         this.dispose();    
-        Home home= new Home();
-        home.setVisible(true);
-        home.currentUser=currentUser;
-        home.pack();
-        home.setLocationRelativeTo(null);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        abstractThings.goHome(currentUser);
     }//GEN-LAST:event_homelabelMouseClicked
 
     public void fillList() {
-        jwatchedlist.setModel(dm);
+        
+        dm.clear();
         String query="SELECT `MOVIE_ID` FROM `watchedlist` WHERE `EMAIL` = ?";
         String result=abstractThings.fillArray(currentUser, query);
         String[] values = result.split(",");
         for(String index:values) {
-            dm.addElement(index);
+            String result2=abstractThings.getPicURL(index);
+            ImageIcon icon=new ImageIcon("C:\\Users\\Admin\\Downloads\\Movie_Posters\\"+result2);
+            Image imagefits =icon.getImage();
+            Image imagefitting=imagefits.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            dm.addElement(new ImageNText(index, new ImageIcon(imagefitting)));      
         }
+        jwatchedlist.setCellRenderer(new Renderer());
+        jwatchedlist.setModel(dm);
+        
     }
     
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         try {
             int index=jwatchedlist.getSelectedIndex();
-            String movieName=jwatchedlist.getSelectedValue();
+            Object val=jwatchedlist.getSelectedValue();
+            ImageNText is=(ImageNText)val;
+            Object mName=is.getName();
+            String movieName=mName.toString();
             String query="DELETE FROM `watchedlist` WHERE `MOVIE_ID`=? AND `EMAIL`=?";
             abstractThings.removeFromList(currentUser, movieName,query);
             dm.removeElementAt(index);
@@ -260,7 +271,10 @@ public class Watchedlist extends javax.swing.JFrame {
 
     private void jwatchedlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jwatchedlistMouseClicked
         if (evt.getClickCount()==2 ){
-            String movieName=jwatchedlist.getSelectedValue();
+            Object val=jwatchedlist.getSelectedValue();
+            ImageNText is=(ImageNText)val;
+            Object mName=is.getName();
+            String movieName=mName.toString();
             boolean found=abstractThings.searchButtonAction(movieName,currentUser);
             if(found) {      
                 this.dispose();    
@@ -309,6 +323,7 @@ public class Watchedlist extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel homelabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> jwatchedlist;
