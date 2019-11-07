@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/UserComments.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/AbstractThings.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/MovieDetails.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/AdvancedSearch.java</file>
+            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/web/searchresults.html</file>
+            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/web/advancedSearch.html</file>
         </group>
     </open-files>
 </project-private>
