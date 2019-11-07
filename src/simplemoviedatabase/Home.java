@@ -25,6 +25,8 @@ public class Home extends javax.swing.JFrame {
         searchButton = new javax.swing.JButton();
         watchlist = new javax.swing.JLabel();
         watchedMovies = new javax.swing.JLabel();
+        theatres = new javax.swing.JLabel();
+        advanceSearch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +100,28 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        theatres.setBackground(new java.awt.Color(0, 0, 0));
+        theatres.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        theatres.setForeground(new java.awt.Color(255, 255, 255));
+        theatres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        theatres.setText("Movies Available In Theatres");
+        theatres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                theatresMouseClicked(evt);
+            }
+        });
+
+        advanceSearch.setBackground(new java.awt.Color(0, 0, 0));
+        advanceSearch.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        advanceSearch.setForeground(new java.awt.Color(255, 51, 51));
+        advanceSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        advanceSearch.setText("Advanced Search");
+        advanceSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                advanceSearchMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,7 +149,13 @@ public class Home extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(searchButton))))))
+                                    .addComponent(searchButton)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(369, 369, 369)
+                        .addComponent(theatres, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(427, 427, 427)
+                        .addComponent(advanceSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(330, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,15 +166,19 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(titleset2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titleset1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logOutLabel)
                     .addComponent(watchedMovies)
                     .addComponent(watchlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(180, 180, 180)
+                .addGap(52, 52, 52)
+                .addComponent(theatres)
+                .addGap(18, 18, 18)
+                .addComponent(advanceSearch)
+                .addGap(46, 46, 46)
                 .addComponent(exitLabel)
                 .addContainerGap())
         );
@@ -215,6 +249,19 @@ public class Home extends javax.swing.JFrame {
          abstractThings.openWatchedList(currentUser);
     }//GEN-LAST:event_watchedMoviesMouseClicked
 
+    private void theatresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_theatresMouseClicked
+        ChooseTheatre choosetheatre=new ChooseTheatre();
+        choosetheatre.setVisible(true);
+        choosetheatre.pack();
+        choosetheatre.setLocationRelativeTo(null);
+        choosetheatre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+    }//GEN-LAST:event_theatresMouseClicked
+
+    private void advanceSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_advanceSearchMouseClicked
+        AdvancedSearch advancenedsearch= new AdvancedSearch();
+       advancenedsearch.search();
+    }//GEN-LAST:event_advanceSearchMouseClicked
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -249,11 +296,13 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel advanceSearch;
     private javax.swing.JLabel exitLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logOutLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbar;
+    private javax.swing.JLabel theatres;
     private javax.swing.JLabel titleset1;
     private javax.swing.JLabel titleset2;
     private javax.swing.JLabel watchedMovies;

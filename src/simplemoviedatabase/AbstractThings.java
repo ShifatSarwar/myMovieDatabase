@@ -27,6 +27,7 @@ public abstract class AbstractThings {
                 movieDetails.setMovieYear(resultset.getString("YEAR"));
                 movieDetails.setMovieDescription(resultset.getString("DESCRIPTION"));
                 movieDetails.setPoster(resultset.getString("PICTURE"));
+                movieDetails.setMovieRating(resultset.getString("TITLE"));
                 movieDetails.setVisible(true);
                 movieDetails.pack();
                 movieDetails.setLocationRelativeTo(null);
@@ -140,7 +141,7 @@ public abstract class AbstractThings {
         return record;
     }
     
-    public void postToList(String cUser, String movieName, String query, String comment){
+    public void postToList(String cUser, String movieName, String query, String comment, int rate){
         try {
             String anotherquery="SELECT `name` FROM `users` WHERE `EMAIL`=?";
                statement=DatabaseConnection.getConnection().prepareStatement(anotherquery);
@@ -155,6 +156,7 @@ public abstract class AbstractThings {
                statement.setString(2, uname);
                statement.setString(3, comment);
                statement.setString(4,movieName);
+               statement.setInt(5,rate);
                statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -247,12 +249,13 @@ public abstract class AbstractThings {
         return "";
     }
     
-    public void updateList(String cUser, String movieName, String query, String comment) {
+    public void updateList(String cUser, String movieName, String query, String comment, int rate) {
         try {
             statement=DatabaseConnection.getConnection().prepareStatement(query);
             statement.setString(1,comment);
-            statement.setString(2, cUser);
-            statement.setString(3, movieName);
+            statement.setInt(2, rate);
+            statement.setString(3, cUser);
+            statement.setString(4, movieName);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -286,6 +289,49 @@ public abstract class AbstractThings {
             home.currentUser=cUser;
             home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          }
+    }
+    
+    public String getCalculatedRating(String movietitle) {
+        String query="SELECT `RATE` FROM `userreview` WHERE `TITLE`=?";
+        try {
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            statement.setString(1,movietitle);
+            resultset=statement.executeQuery();
+            double rate=0.0;
+            int count=0;
+            while(resultset.next()) {
+                rate=rate+resultset.getInt("RATE");
+                count++;
+            }
+            if(count==0) {
+                return "Not Rated";
+            }else {
+                rate=rate/count;
+                return String.valueOf(rate);           
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "Not Rated";
+    }
+    
+    public int getUserRating(String cUser, String mName) {
+        try {
+            String anotherquery="SELECT `RATE` FROM `userreview` WHERE `EMAIL`=? AND `TITLE`=?";
+            statement=DatabaseConnection.getConnection().prepareStatement(anotherquery);
+            statement.setString(1,cUser);
+            statement.setString(2,mName);
+            resultset=statement.executeQuery();
+            int rate=0;
+            if(resultset.next()) {
+                rate=resultset.getInt("RATE");
+            }
+            return rate;
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
    
 }

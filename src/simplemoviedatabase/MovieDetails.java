@@ -20,6 +20,10 @@ public class MovieDetails extends javax.swing.JFrame {
         titleLabel.setText(title);
     }
     
+    public void setMovieRating(String title) {
+        jRatingLabel.setText(abstractThings.getCalculatedRating(title));
+    } 
+    
     public void setMovieYear(String year) {
         yearLabel.setText(year);
     }
@@ -51,12 +55,13 @@ public class MovieDetails extends javax.swing.JFrame {
         picLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         desArea = new javax.swing.JTextArea();
-        imdbLabel = new javax.swing.JLabel();
         addtowatchedlist = new javax.swing.JButton();
         addTowatchlist = new javax.swing.JButton();
         usercommentsLabel = new javax.swing.JLabel();
         watchlistLabel = new javax.swing.JLabel();
         watchedListLabel1 = new javax.swing.JLabel();
+        jlabel = new javax.swing.JLabel();
+        jRatingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,12 +137,6 @@ public class MovieDetails extends javax.swing.JFrame {
         desArea.setBorder(null);
         jScrollPane1.setViewportView(desArea);
 
-        imdbLabel.setBackground(new java.awt.Color(0, 0, 0));
-        imdbLabel.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
-        imdbLabel.setForeground(new java.awt.Color(245, 197, 24));
-        imdbLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imdbLabel.setText("Advanced Search");
-
         addtowatchedlist.setBackground(new java.awt.Color(255, 255, 255));
         addtowatchedlist.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         addtowatchedlist.setForeground(new java.awt.Color(153, 153, 153));
@@ -185,6 +184,26 @@ public class MovieDetails extends javax.swing.JFrame {
             }
         });
 
+        jlabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        jlabel.setForeground(new java.awt.Color(153, 153, 153));
+        jlabel.setText("Movie Rating:");
+        jlabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlabelMouseClicked(evt);
+            }
+        });
+
+        jRatingLabel.setBackground(new java.awt.Color(0, 0, 0));
+        jRatingLabel.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jRatingLabel.setForeground(new java.awt.Color(255, 0, 51));
+        jRatingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jRatingLabel.setText("Not Rated ");
+        jRatingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRatingLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -216,18 +235,23 @@ public class MovieDetails extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jlabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(usercommentsLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(yearLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usercommentsLabel)
-                                    .addComponent(yearLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addTowatchlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addtowatchedlist, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 169, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(addTowatchlist, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(addtowatchedlist, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jRatingLabel)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(imdbLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,6 +276,7 @@ public class MovieDetails extends javax.swing.JFrame {
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,10 +289,14 @@ public class MovieDetails extends javax.swing.JFrame {
                                 .addComponent(yearLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(usercommentsLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imdbLabel)
-                        .addGap(0, 122, Short.MAX_VALUE))
-                    .addComponent(picLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jlabel))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jRatingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 105, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -351,6 +380,14 @@ public class MovieDetails extends javax.swing.JFrame {
         abstractThings.openWatchedList(currentUser);
     }//GEN-LAST:event_watchedListLabel1MouseClicked
 
+    private void jlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlabelMouseClicked
+
+    private void jRatingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRatingLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRatingLabelMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -388,9 +425,10 @@ public class MovieDetails extends javax.swing.JFrame {
     private javax.swing.JButton addtowatchedlist;
     private javax.swing.JTextArea desArea;
     private javax.swing.JLabel homelabel;
-    private javax.swing.JLabel imdbLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jRatingLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlabel;
     private javax.swing.JLabel logOutLabel;
     private javax.swing.JLabel picLabel;
     private javax.swing.JButton searchButton;
