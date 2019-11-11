@@ -41,6 +41,7 @@ public class CommentWindow extends javax.swing.JFrame {
         postORdeleteButton.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         postORdeleteButton.setForeground(new java.awt.Color(153, 153, 153));
         postORdeleteButton.setText("Remove Comment");
+        postORdeleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         postORdeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 postORdeleteButtonActionPerformed(evt);
@@ -50,6 +51,7 @@ public class CommentWindow extends javax.swing.JFrame {
         backORrepostLabel.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         backORrepostLabel.setForeground(new java.awt.Color(255, 255, 255));
         backORrepostLabel.setText("Get back to Comments...");
+        backORrepostLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         backORrepostLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backORrepostLabelMouseClicked(evt);

@@ -49,6 +49,7 @@ public class Adminhome extends javax.swing.JFrame {
         exitLabel.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
         exitLabel.setForeground(new java.awt.Color(153, 153, 153));
         exitLabel.setText("Exit");
+        exitLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exitLabelMouseClicked(evt);
@@ -80,6 +81,7 @@ public class Adminhome extends javax.swing.JFrame {
         searchButton.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         searchButton.setForeground(new java.awt.Color(153, 153, 153));
         searchButton.setText("Search");
+        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -89,6 +91,7 @@ public class Adminhome extends javax.swing.JFrame {
         watchedlist.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         watchedlist.setForeground(new java.awt.Color(153, 153, 153));
         watchedlist.setText("Watchedlist");
+        watchedlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchedlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchedlistMouseClicked(evt);
@@ -98,6 +101,7 @@ public class Adminhome extends javax.swing.JFrame {
         watchlist.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         watchlist.setForeground(new java.awt.Color(153, 153, 153));
         watchlist.setText("Watchlist");
+        watchlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchlistMouseClicked(evt);
@@ -107,6 +111,7 @@ public class Adminhome extends javax.swing.JFrame {
         logOutLabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(153, 153, 153));
         logOutLabel.setText("Log Out");
+        logOutLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutLabelMouseClicked(evt);
@@ -159,6 +164,7 @@ public class Adminhome extends javax.swing.JFrame {
         addMovieButton.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         addMovieButton.setForeground(new java.awt.Color(153, 153, 153));
         addMovieButton.setText("Add Movie");
+        addMovieButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addMovieButton.setOpaque(false);
         addMovieButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

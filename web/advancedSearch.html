@@ -7,7 +7,6 @@
       <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
    </head>
    <body>
-       
        <div class="search-box">
        <input type="text" name="search" id="search" class="search-txt" placeholder="Search Movies..."/>
        <a class="search-btn" href="#"  onclick="check()">
@@ -17,7 +16,10 @@
        <div class="header"><div>Movie<span>DB</span></div></div>
        <script language="javascript">
         function check() {
+            var movieName=document.getElementById("search").value;
+            localStorage.setItem("textvalue",movieName);
             window.location.href = 'searchresults.html';
+            return false;
         } 
 </script>
    </body>

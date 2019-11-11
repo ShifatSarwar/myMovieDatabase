@@ -64,6 +64,7 @@ public class SignUp extends javax.swing.JFrame {
         signupButton.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         signupButton.setForeground(new java.awt.Color(153, 153, 153));
         signupButton.setText("Signup");
+        signupButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signupButton.setOpaque(false);
         signupButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -134,6 +135,7 @@ public class SignUp extends javax.swing.JFrame {
         loginLabel.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         loginLabel.setForeground(new java.awt.Color(153, 153, 153));
         loginLabel.setText("Already a User? Login");
+        loginLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginLabelMouseClicked(evt);
@@ -143,6 +145,7 @@ public class SignUp extends javax.swing.JFrame {
         forgetPasswordLabel.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         forgetPasswordLabel.setForeground(new java.awt.Color(153, 153, 153));
         forgetPasswordLabel.setText("Forget Password?");
+        forgetPasswordLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         forgetPasswordLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 forgetPasswordLabelMouseClicked(evt);
@@ -153,6 +156,7 @@ public class SignUp extends javax.swing.JFrame {
         exitLabel.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
         exitLabel.setForeground(new java.awt.Color(153, 153, 153));
         exitLabel.setText("Exit");
+        exitLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exitLabelMouseClicked(evt);

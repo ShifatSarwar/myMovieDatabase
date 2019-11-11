@@ -65,6 +65,7 @@ public class ChooseTheatre extends javax.swing.JFrame {
         goToButton.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         goToButton.setForeground(new java.awt.Color(153, 153, 153));
         goToButton.setText("Go...");
+        goToButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goToButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goToButtonActionPerformed(evt);

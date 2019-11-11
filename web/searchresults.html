@@ -2,16 +2,68 @@
 <html>
    <head>
       <title>Search Results</title>
+      <link rel="stylesheet" href="style2.css">
       <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
    </head>
    <body>
-      <p>Movie Title</p>
-      <br />
+       <div class="title"><span id="result"></span></div>
+       <div class="header"><div>Movie<span>DB</span></div></div>
+       <div class="frame">
       <iframe 
+          id="frameZone"
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/y881t8ilMyc"
         frameborder="0"
         allowfullscreen></iframe>
+   </div>
+       <div class="wrapper">
+           <img class="imdb" src = "C:\Users\Admin\Downloads\Movie_Posters\imdbLogo.png" onclick="parsingJsonIMDB()"/>
+       </div>
+      <div class="search-box">
+       <input type="text" name="search" id="search" class="search-txt" placeholder="Search Movies..."/>
+       <a class="search-btn" href="#"  onclick="check()">
+       <i class="fas fa-search"></i>
+       </a>
+     </div>
+       <script language="javascript">
+        document.getElementById("result").innerHTML=localStorage.getItem("textvalue"); 
+        var htmlLink=localStorage.getItem("textvalue");
+        frameZone.src="http://simpleapi.traileraddict.com/embed/avengers-endgame/trailer";
+   //  https://www.youtube.com/?apikey=AIzaSyAW740800-nKwy5ju_QzFKdXZwkqVT2svk/embed/"
+        
+        function check() {
+            var movieName=document.getElementById("search").value;
+            localStorage.setItem("textvalue",movieName);
+            window.location.href = 'searchresults.html';
+            return false;
+        } 
+        
+        function parsingJsonIMDB() {
+            var promise1 = new Promise(function(resolve, reject) {
+            var xhr = new XMLHttpRequest(),
+            method = "GET",
+            url = "http://www.omdbapi.com/?apikey=d87b5a9a&t="+htmlLink.toString();
+
+            xhr.open(method, url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    resolve(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+        });
+        promise1.then(function(value) {
+            window.location.href="https://www.imdb.com/title/"+value.imdbID;
+        });
+         //  var parsedText=JSON.parse();
+                 //    window.location.href="https://www.imdb.com/title/"+content.imdbID;
+                    //"http://www.omdbapi.com/?apikey=d87b5a9a&t="+htmlLink.toString();
+                    //AIzaSyAW740800-nKwy5ju_QzFKdXZwkqVT2svk
+                    //Youtube api
+        }
+
+</script>
+
    </body>
 </html>

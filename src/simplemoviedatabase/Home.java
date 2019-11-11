@@ -43,6 +43,7 @@ public class Home extends javax.swing.JFrame {
         logOutLabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(153, 153, 153));
         logOutLabel.setText("Log Out");
+        logOutLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutLabelMouseClicked(evt);
@@ -74,6 +75,7 @@ public class Home extends javax.swing.JFrame {
         searchButton.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         searchButton.setForeground(new java.awt.Color(153, 153, 153));
         searchButton.setText("Search");
+        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -84,6 +86,7 @@ public class Home extends javax.swing.JFrame {
         watchlist.setForeground(new java.awt.Color(153, 153, 153));
         watchlist.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         watchlist.setText("Watchlist");
+        watchlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchlistMouseClicked(evt);
@@ -94,6 +97,7 @@ public class Home extends javax.swing.JFrame {
         watchedMovies.setForeground(new java.awt.Color(153, 153, 153));
         watchedMovies.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         watchedMovies.setText("Watched Movies");
+        watchedMovies.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchedMovies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchedMoviesMouseClicked(evt);
@@ -105,6 +109,7 @@ public class Home extends javax.swing.JFrame {
         theatres.setForeground(new java.awt.Color(255, 255, 255));
         theatres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         theatres.setText("Movies Available In Theatres");
+        theatres.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         theatres.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 theatresMouseClicked(evt);
@@ -116,6 +121,7 @@ public class Home extends javax.swing.JFrame {
         advanceSearch.setForeground(new java.awt.Color(255, 51, 51));
         advanceSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         advanceSearch.setText("Advanced Search");
+        advanceSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         advanceSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 advanceSearchMouseClicked(evt);

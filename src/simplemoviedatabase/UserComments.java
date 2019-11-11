@@ -66,6 +66,7 @@ public class UserComments extends javax.swing.JFrame {
         commentButton.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         commentButton.setForeground(new java.awt.Color(153, 153, 153));
         commentButton.setText("Comment");
+        commentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         commentButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 commentButtonMouseClicked(evt);
@@ -80,6 +81,7 @@ public class UserComments extends javax.swing.JFrame {
         watchlist.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         watchlist.setForeground(new java.awt.Color(153, 153, 153));
         watchlist.setText("Watchlist");
+        watchlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchlistMouseClicked(evt);
@@ -89,6 +91,7 @@ public class UserComments extends javax.swing.JFrame {
         homelabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         homelabel.setForeground(new java.awt.Color(153, 153, 153));
         homelabel.setText("Home");
+        homelabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         homelabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 homelabelMouseClicked(evt);
@@ -98,6 +101,7 @@ public class UserComments extends javax.swing.JFrame {
         logOutLabel.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         logOutLabel.setForeground(new java.awt.Color(153, 153, 153));
         logOutLabel.setText("Log Out");
+        logOutLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutLabelMouseClicked(evt);
@@ -125,6 +129,7 @@ public class UserComments extends javax.swing.JFrame {
         watchedlist.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
         watchedlist.setForeground(new java.awt.Color(153, 153, 153));
         watchedlist.setText("Watchedlist");
+        watchedlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         watchedlist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 watchedlistMouseClicked(evt);
@@ -135,6 +140,7 @@ public class UserComments extends javax.swing.JFrame {
         searchButton.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         searchButton.setForeground(new java.awt.Color(153, 153, 153));
         searchButton.setText("Search");
+        searchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
