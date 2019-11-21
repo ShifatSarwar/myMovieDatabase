@@ -1,94 +1,66 @@
 package simplemoviedatabase;
 
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application; 
+import javafx.application.Platform;
+import javafx.scene.Scene;  
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;  
+import javafx.stage.WindowEvent;
 
-public class Trailer extends javax.swing.JFrame {
-
-    public Trailer() {
-        initComponents();
+public class Trailer extends Application implements Observer, Runnable { 
+    public static String[] arguments;
+    
+    
+    @Override
+    public void start(Stage primaryStage) { 
+        try {
+            AbstractThings abstractThings=new AbstractThings() {};
+            
+            String trailerKey=abstractThings.getTempKey();
+            String trailerName=abstractThings.getTempName();   
+            primaryStage.setTitle(trailerName);
+            WebView webview = new WebView();
+            String url="https://www.youtube.com/embed/"+trailerKey;
+            webview.getEngine().load(url);
+            webview.setPrefSize(640, 390);
+            primaryStage.setScene(new Scene(webview));
+            primaryStage.show();
+        
+            primaryStage.setOnCloseRequest((WindowEvent event) -> {
+                try {
+                    primaryStage.close();
+                    webview.getEngine().load(null);
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                } catch (UnsupportedOperationException ex) {
+                    Logger.getLogger(Trailer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            
+        } catch(Exception e) {}
     }
     
-    public static JPanel getBrowser() {
-        JPanel webPanel=new JPanel(new BorderLayout());
-        JWebBrowser wb=new JWebBrowser();
-        webPanel.add(wb,BorderLayout.CENTER);
-        wb.setBarsVisible(false);
-        wb.navigate("https://www.youtube.com/watch_popup?v=GKiHB5AzihE&t=79s");
-        return webPanel;
+    public static void main(String[] args) {  
+        arguments=args;
+    }    
+    
+    @Override
+    public void run(){
+        launch();
     }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        NativeInterface.open();
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Trailer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Trailer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Trailer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Trailer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame=new JFrame("Trailer");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.getContentPane().add(getBrowser(),BorderLayout.CENTER);
-                frame.setSize(400,300);
-                frame.setVisible(true);
+    
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        Platform.runLater(new Runnable() {
+            public void run() {             
+                new Trailer().start(new Stage());
             }
         });
-        NativeInterface.runEventPump();
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                NativeInterface.close();
-                
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        }){
-            
-        });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    
 }
+ 

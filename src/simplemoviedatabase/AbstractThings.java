@@ -1,13 +1,26 @@
 package simplemoviedatabase;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.web.WebView;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public abstract class AbstractThings {
     PreparedStatement statement;
@@ -333,5 +346,137 @@ public abstract class AbstractThings {
         }
         return 0;
     }
-   
+    
+    public String getIMDBID(String title) {
+        String url= "http://www.omdbapi.com/?apikey=d87b5a9a&t="+title; 
+        try { 
+            JSONObject json = readJsonFromUrl(url);
+            return json.getString("imdbID");         
+         } catch (FileNotFoundException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException | JSONException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return "";
+    }
+    
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
+        }
+    }
+    
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+         }
+        return sb.toString();
+  }
+    
+    public ArrayList<String> getTrailersName(String url) {
+        ArrayList<String> trailerName=new ArrayList<>();
+        try { 
+            JSONObject json = readJsonFromUrl(url);
+            JSONObject jsonVideo =json.getJSONObject("videos");
+            JSONArray jsonVideoResult=jsonVideo.getJSONArray("results");      
+            for (int i = 0; i < jsonVideoResult.length(); i++) {
+                JSONObject jsonobject = jsonVideoResult.getJSONObject(i);
+                trailerName.add(jsonobject.getString("name"));  
+            }
+            return trailerName;
+        } catch (FileNotFoundException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException | JSONException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return trailerName;
+    }
+    
+    public ArrayList<String> getTrailersKey(String url) {
+        ArrayList<String> trailerKeys=new ArrayList<>();
+        try { 
+            JSONObject json = readJsonFromUrl(url);
+            JSONObject jsonVideo =json.getJSONObject("videos");
+            JSONArray jsonVideoResult=jsonVideo.getJSONArray("results");         
+            for (int i = 0; i < jsonVideoResult.length(); i++) {
+                JSONObject jsonobject = jsonVideoResult.getJSONObject(i);
+                trailerKeys.add(jsonobject.getString("key"));
+            }
+            return trailerKeys;
+        } catch (FileNotFoundException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException | JSONException ex) {
+             Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+         }   
+        return trailerKeys;
+    }
+    
+    public void setTempTable(String name, String key) {
+        String query="INSERT INTO`tempuse` (`NAME`, `TKEY`) VALUES (?, ?)";
+        try {
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            statement.setString(1,name);
+            statement.setString(2, key);
+            statement.executeUpdate(); 
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getTempName() {
+        try {
+            String query="SELECT `NAME` FROM `tempuse`";
+            String name="";
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            resultset=statement.executeQuery();
+            if(resultset.next()) {
+                name=resultset.getString("NAME");
+            }
+            return name;
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
+    public String getTempKey() {
+        try {
+            String query="SELECT `TKEY` FROM `tempuse`";
+            String key="";
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            resultset=statement.executeQuery();
+            if(resultset.next()) {
+                key=resultset.getString("TKEY");
+            }
+            return key;
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
+    public void deleteTempData() {
+        String query="DELETE FROM `tempuse`";
+        try {
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            statement.executeUpdate(); 
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void playTrailer(String trailerKey) {
+        WebView webview = new WebView();
+        String url="https://www.youtube.com/embed/"+trailerKey;
+        webview.getEngine().load(url);
+        webview.setPrefSize(640, 390);
+    }
 }

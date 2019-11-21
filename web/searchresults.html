@@ -11,14 +11,15 @@
        <div class="header"><div>Movie<span>DB</span></div></div>
        <div class="frame">
       <iframe 
-          id="frameZone"
+        id="frameZone"
         width="560"
         height="315"
+        src="https://www.youtube.com/embed/watch?v=LyDbK1dzfdU"
         frameborder="0"
         allowfullscreen></iframe>
    </div>
        <div class="wrapper">
-           <img class="imdb" src = "C:\Users\Admin\Downloads\Movie_Posters\imdbLogo.png" onclick="parsingJsonIMDB()"/>
+           <img class="imdb" src = "G:\Codes\workplace2\SimpleMovieDatabase\web\imdbLogo.png" onclick="parsingJsonIMDB()"/>
        </div>
       <div class="search-box">
        <input type="text" name="search" id="search" class="search-txt" placeholder="Search Movies..."/>
@@ -29,9 +30,43 @@
        <script language="javascript">
         document.getElementById("result").innerHTML=localStorage.getItem("textvalue"); 
         var htmlLink=localStorage.getItem("textvalue");
-        frameZone.src="http://simpleapi.traileraddict.com/embed/avengers-endgame/trailer";
+      //  var firstPart="https://api.themoviedb.org/3/movie/";
+  //      var lastPart="/videos?api_key=d30ff0891a088e06e97d6cd1130b97e1&language=en-US";
+     //   var totalPart=firstPart+getMovieID()+lastPart;
+   //     var promise1 = new Promise(function(resolve, reject) {
+     //       var xhr = new XMLHttpRequest(),
+       //     method = "GET",
+        //    url = totalPart;
+         //   xhr.open(method, url, true);
+           // xhr.onreadystatechange = function() {
+             //   if (xhr.readyState === 4 && xhr.status === 200) {
+               //     resolve(JSON.parse(xhr.responseText));
+               // }
+           // };
+           // xhr.send();
+       // });
+       // promise1.then(function(value) {
+       //   frameZone.src="https://www.youtube.com/embed/watch?v=LyDbK1dzfdU";
+       // });
    //  https://www.youtube.com/?apikey=AIzaSyAW740800-nKwy5ju_QzFKdXZwkqVT2svk/embed/"
-        
+    //    function getMovieID() {
+      //      var promise1 = new Promise(function(resolve, reject) {
+        //    var xhr = new XMLHttpRequest(),
+          //  method = "GET",
+            //url = "http://www.omdbapi.com/?apikey=d87b5a9a&t="+htmlLink.toString();
+//
+  //          xhr.open(method, url, true);
+    //        xhr.onreadystatechange = function() {
+      //          if (xhr.readyState === 4 && xhr.status === 200) {
+        //            resolve(JSON.parse(xhr.responseText));
+          //      }
+          //  };
+          //  xhr.send();
+     //   });
+      //  promise1.then(function(value) {
+      //      return value.imdbID;
+      //  });
+   // }
         function check() {
             var movieName=document.getElementById("search").value;
             localStorage.setItem("textvalue",movieName);

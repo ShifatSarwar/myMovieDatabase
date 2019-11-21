@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/web/searchresults.html</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/Renderer.java</file>
             <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/Trailer.java</file>
+            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/AbstractThings.java</file>
+            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/TrailerList.java</file>
             <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/MovieDetails.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/AdvancedSearch.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/Home.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/TrailerWindow.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/SignUp.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/ChooseTheatre.java</file>
-            <file>file:/G:/Codes/workplace2/SimpleMovieDatabase/src/simplemoviedatabase/ImageNText.java</file>
         </group>
     </open-files>
 </project-private>

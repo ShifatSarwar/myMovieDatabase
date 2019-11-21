@@ -1,25 +1,16 @@
 package simplemoviedatabase;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.io.BufferedReader;
-import org.json.JSONObject; 
+import java.awt.Image; 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.json.JSONException;
-
 
 public class MovieDetails extends javax.swing.JFrame {
      int movieID;
@@ -48,7 +39,7 @@ public class MovieDetails extends javax.swing.JFrame {
     }
     
     public void setPoster(String picURL) {
-        ImageIcon icon=new ImageIcon("C:\\Users\\Admin\\Downloads\\Movie_Posters\\"+picURL);
+        ImageIcon icon=new ImageIcon("C:\\Users\\zarif\\Downloads\\Movie_Posters\\"+picURL);
         Image imagefits =icon.getImage();
         Image imagefitting=imagefits.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), Image.SCALE_SMOOTH);
         picLabel.setIcon(new ImageIcon(imagefitting));
@@ -267,7 +258,7 @@ public class MovieDetails extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(watchedListLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(watchlistLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(homelabel)
@@ -305,8 +296,7 @@ public class MovieDetails extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(38, 38, 38)
-                                        .addComponent(imdbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6))
+                                        .addComponent(imdbLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(trailerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
@@ -448,39 +438,16 @@ public class MovieDetails extends javax.swing.JFrame {
 
     private void imdbLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imdbLabelMouseClicked
         String title = (titleLabel.getText()).replaceAll("\\s+", "+");
-        
-        String url= "http://www.omdbapi.com/?apikey=d87b5a9a&t="+title; 
         try { 
-            JSONObject json = readJsonFromUrl(url);
-            URI uri = new URI("https://www.imdb.com/title/"+json.get("imdbID"));
+            URI uri = new URI("https://www.imdb.com/title/"+abstractThings.getIMDBID(title));
             java.awt.Desktop.getDesktop().browse(uri);
-  
          } catch (FileNotFoundException ex) {
              Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IOException | JSONException | URISyntaxException ex) {
+         } catch (IOException | URISyntaxException ex) {
              Logger.getLogger(MovieDetails.class.getName()).log(Level.SEVERE, null, ex);
          }
     }//GEN-LAST:event_imdbLabelMouseClicked
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            is.close();
-        }
-    }
     
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-         }
-        return sb.toString();
-  }
     private void jRatingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRatingLabelMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jRatingLabelMouseClicked
@@ -490,7 +457,17 @@ public class MovieDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_jlabel1MouseClicked
 
     private void trailerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trailerLabelMouseClicked
-
+        String title = (titleLabel.getText()).replaceAll("\\s+", "+");
+        String titleID=abstractThings.getIMDBID(title);
+        String urlpart1="http://api.themoviedb.org/3/movie/";
+        String urlpart2="?api_key=d30ff0891a088e06e97d6cd1130b97e1&append_to_response=videos";
+        TrailerList trailerlist=new TrailerList();
+        trailerlist.setVisible(true);
+        trailerlist.pack();
+        trailerlist.url=urlpart1+titleID+urlpart2;
+        trailerlist.fillList();
+        trailerlist.setLocationRelativeTo(null);
+        trailerlist.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_trailerLabelMouseClicked
 
     public static void main(String args[]) {
