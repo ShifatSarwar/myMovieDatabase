@@ -23,7 +23,7 @@ public class Watchlist extends javax.swing.JFrame {
         String[] values = result.split(",");
         for(String index:values) {
             String result2=abstractThings.getPicURL(index);
-            ImageIcon icon=new ImageIcon("C:\\Users\\Admin\\Downloads\\Movie_Posters\\"+result2);
+            ImageIcon icon=new ImageIcon("C:\\Users\\zarif\\Pictures\\Camera Roll\\MoviePosters\\"+result2);
             Image imagefits =icon.getImage();
             Image imagefitting=imagefits.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             dm.addElement(new ImageNText(index, new ImageIcon(imagefitting)));      

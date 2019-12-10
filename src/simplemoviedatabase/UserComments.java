@@ -237,7 +237,7 @@ public class UserComments extends javax.swing.JFrame {
     public void setPosterandTitle() {
         titleLabel.setText(movieTitle);
         String picURL=abstractThings.getPicURL(movieTitle);
-        ImageIcon icon=new ImageIcon("C:\\Users\\Admin\\Downloads\\Movie_Posters\\"+picURL);
+        ImageIcon icon=new ImageIcon("C:\\Users\\zarif\\Pictures\\Camera Roll\\MoviePosters\\"+picURL);
         Image imagefits =icon.getImage();
         Image imagefitting=imagefits.getScaledInstance(posterLabel.getWidth(), posterLabel.getHeight(), Image.SCALE_SMOOTH);
         posterLabel.setIcon(new ImageIcon(imagefitting));

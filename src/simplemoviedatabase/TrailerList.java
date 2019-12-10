@@ -1,9 +1,8 @@
 package simplemoviedatabase;
 
 import java.util.ArrayList;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.web.WebView;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import javax.swing.DefaultListModel;
 
 public class TrailerList extends javax.swing.JFrame {
@@ -134,12 +133,26 @@ public class TrailerList extends javax.swing.JFrame {
             abstractThings.deleteTempData();
             int value=jtrailerList.getSelectedIndex();
             ArrayList<String> trailerkeys=abstractThings.getTrailersKey(url); 
-          //  abstractThings.playTrailer(trailerkeys.get(value));
-            abstractThings.setTempTable(jtrailerList.getSelectedValue(),trailerkeys.get(value));
+            if(value==0) {
+                abstractThings.setTempTable2(trailerkeys);
+            } else {
+                //  abstractThings.playTrailer(trailerkeys.get(value));
+                abstractThings.setTempTable(jtrailerList.getSelectedValue(),trailerkeys.get(value));
+                //  t.launchMediaPlayer(); 
+            }
             Trailer t=new Trailer();
-            new Thread((Runnable) t).start();
-            track=true;
-          //  t.launchMediaPlayer(); 
+            if(track) {
+                //t.doStuff();
+               abstractThings.setTrackerValue(true);
+               Thread thread = new Thread(()->Platform.runLater(()->{
+                Stage stage = new Stage();
+    stage.show();
+}));
+                
+            } else {
+                new Thread(t).start();
+                track=true;
+            }
         }
     }//GEN-LAST:event_jtrailerListMouseClicked
 
@@ -157,6 +170,7 @@ public class TrailerList extends javax.swing.JFrame {
     
     public void fillList() {
         jtrailerList.setModel(dm);
+        dm.addElement("Play All Trailer");
         ArrayList<String> trailerName=abstractThings.getTrailersName(url);
         for(String index:trailerName) {
             dm.addElement(index);      

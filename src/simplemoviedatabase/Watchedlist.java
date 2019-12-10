@@ -227,15 +227,14 @@ public class Watchedlist extends javax.swing.JFrame {
         abstractThings.goHome(currentUser);
     }//GEN-LAST:event_homelabelMouseClicked
 
-    public void fillList() {
-        
+    public void fillList() { 
         dm.clear();
         String query="SELECT `MOVIE_ID` FROM `watchedlist` WHERE `EMAIL` = ?";
         String result=abstractThings.fillArray(currentUser, query);
         String[] values = result.split(",");
         for(String index:values) {
             String result2=abstractThings.getPicURL(index);
-            ImageIcon icon=new ImageIcon("C:\\Users\\Admin\\Downloads\\Movie_Posters\\"+result2);
+            ImageIcon icon=new ImageIcon("C:\\Users\\zarif\\Pictures\\Camera Roll\\MoviePosters\\"+result2);
             Image imagefits =icon.getImage();
             Image imagefitting=imagefits.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             dm.addElement(new ImageNText(index, new ImageIcon(imagefitting)));      

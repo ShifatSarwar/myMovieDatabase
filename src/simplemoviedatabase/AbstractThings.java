@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.web.WebView;
@@ -473,10 +472,50 @@ public abstract class AbstractThings {
         }
     }
     
-    public void playTrailer(String trailerKey) {
-        WebView webview = new WebView();
-        String url="https://www.youtube.com/embed/"+trailerKey;
-        webview.getEngine().load(url);
-        webview.setPrefSize(640, 390);
+    public void setTempTable2(ArrayList<String> a) {
+        String query="INSERT INTO`tempusetwo` (`TKEY`) VALUES (?)";
+        try {
+            for(String index: a) {
+                statement=DatabaseConnection.getConnection().prepareStatement(query);
+                statement.setString(1,index);
+                statement.executeUpdate(); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setTrackerValue(Boolean track) {
+        String query="DELETE FROM `tracker`";
+        try {
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            statement.executeUpdate(); 
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        query="INSERT INTO `tracker` (`TRACK`) VALUES (?)";
+        try {
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            statement.setBoolean(1,track);
+            statement.executeUpdate();             
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Boolean fetchTrackerValue() {
+        try {
+            String query="SELECT `TRACK` FROM `tracker`";
+            Boolean key=false;
+            statement=DatabaseConnection.getConnection().prepareStatement(query);
+            resultset=statement.executeQuery();
+            if(resultset.next()) {
+                key=resultset.getBoolean("TRACK");
+            }
+            return key;
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
